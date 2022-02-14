@@ -47,9 +47,9 @@ TIM_HandleTypeDef htim1;
 #define TRIG_PORT GPIOA
 #define ECHO_PIN GPIO_PIN_8
 #define ECHO_PORT GPIOA
-uint32_t pMillis;
-uint32_t Value1 = 0;
-uint32_t Value2 = 0;
+uint32_t tms;
+uint32_t Valor1 = 0;
+uint32_t Valor2 = 0;
 uint16_t Distance  = 0;
 /* USER CODE END PV */
 
@@ -98,7 +98,6 @@ int main(void)
   HAL_TIM_Base_Start(&htim1);
   HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_RESET);
 
-  //CONFIGURADO AS GPIOs  -- GPIOA RENOMEADAS COM AS IDENTIFICAÇÕES DO LCD
   Lcd_PortType ports [] = {
 		D4_GPIO_Port,
 		D5_GPIO_Port,
@@ -106,7 +105,6 @@ int main(void)
 		D7_GPIO_Port
   };
 
-  //CONFIGURADO OS PINOS DO LCD
   Lcd_PinType pins [] = {
 		D4_Pin,
 		D5_Pin,
@@ -114,7 +112,6 @@ int main(void)
 		D7_Pin
   };
   	Lcd_HandleTypeDef lcd = Lcd_create(ports, pins, RS_GPIO_Port, RS_Pin, EN_GPIO_Port, EN_Pin, LCD_4_BIT_MODE);
-  //CONFIGURADO OS PINOS DO LCD COM AS GPIOs
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -122,22 +119,20 @@ int main(void)
   while (1)
   {
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, 1);
-	  HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_SET);  // pull the TRIG pin HIGH
+	  HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_SET);  //
 	      __HAL_TIM_SET_COUNTER(&htim1, 0);
-	      while (__HAL_TIM_GET_COUNTER (&htim1) < 10);  // wait for 10 us
-	      HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_RESET);  // pull the TRIG pin low
+	      while (__HAL_TIM_GET_COUNTER (&htim1) < 10);  //
+	      HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_RESET);
 
-	      pMillis = HAL_GetTick(); // used this to avoid infinite while loop  (for timeout)
-	      // wait for the echo pin to go high
-	      while (!(HAL_GPIO_ReadPin (ECHO_PORT, ECHO_PIN)) && pMillis + 10 >  HAL_GetTick());
-	      Value1 = __HAL_TIM_GET_COUNTER (&htim1);
+	      tms = HAL_GetTick();
+	      while (!(HAL_GPIO_ReadPin (ECHO_PORT, ECHO_PIN)) && tms + 10 >  HAL_GetTick());
+	      Valor1 = __HAL_TIM_GET_COUNTER (&htim1);
 
-	      pMillis = HAL_GetTick(); // used this to avoid infinite while loop (for timeout)
-	      // wait for the echo pin to go low
-	      while ((HAL_GPIO_ReadPin (ECHO_PORT, ECHO_PIN)) && pMillis + 50 > HAL_GetTick());
-	      Value2 = __HAL_TIM_GET_COUNTER (&htim1);
+	      tms = HAL_GetTick();
+	      while ((HAL_GPIO_ReadPin (ECHO_PORT, ECHO_PIN)) && tms + 50 > HAL_GetTick());
+	      Valor2 = __HAL_TIM_GET_COUNTER (&htim1);
 
-	      Distance = (Value2-Value1)*105/330;
+	      Distance = (Valor2-Valor1)*105/330;
 	      if (Distance < 30 && Distance >= 10) {
 	    	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 1);
 	    	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, 0);
@@ -146,6 +141,7 @@ int main(void)
 	    	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, 0);
 	    	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 0);
 	    	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, 1);
+	    	  Lcd_cursor(&lcd, 1, 0);
 	    	  Lcd_clear(&lcd);
 
 	      } else {
