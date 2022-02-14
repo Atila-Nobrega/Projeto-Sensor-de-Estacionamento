@@ -1,12 +1,16 @@
 # Projeto-Sensor-de-Estacionamento
 Equipe:
-ATILA NOBREGA MAIA AIRES
-LUAN ICARO FERREIRA SANTOS
-TACIO SOARES AGUIAR
+
+* ATILA NOBREGA MAIA AIRES
+
+* LUAN ICARO FERREIRA SANTOS
+
+* TACIO SOARES AGUIAR
+
 
 Projeto da disciplina de Sistemas Microprocessados - Engenharia de Computação UFC
 
-Nosso projeto busca utilizar microcontrolador conectado a um sensor ultrassônico e um motor para simular o estacionamento automático e seguro de um veículo em uma determinada distância.
+Nosso projeto busca utilizar um microcontrolador conectado a um sensor ultrassônico e um motor para simular o estacionamento automático e seguro de um veículo em uma determinada distância.
 
 <h2>SOFTWARE:</h2>
 
