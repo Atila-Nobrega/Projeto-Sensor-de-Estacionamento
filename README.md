@@ -31,16 +31,16 @@ Nosso projeto busca utilizar um microcontrolador conectado a um sensor ultrassô
 
 <h2>DIAGRAMA:</h2>
 
-<img src="https://github.com/Atila-Nobrega/Projeto-Sensor-de-Estacionamento/tree/main/imagens/diagrama.jpg">
+<img src="https://github.com/Atila-Nobrega/Projeto-Sensor-de-Estacionamento/blob/main/imagens/diagrama.jpg">
 
 
 <h2>PROJETO NO PROTEUS:</h2>
 
-<img src="https://github.com/Atila-Nobrega/Projeto-Sensor-de-Estacionamento/tree/main/imagens/projetoproteus.png">
+<img src="https://github.com/Atila-Nobrega/Projeto-Sensor-de-Estacionamento/blob/main/imagens/projetoproteus.png">
 
 <h2>CONFIGURAÇÃO NO STM32CUBE IDE:</h2>
 
-<img src="https://github.com/Atila-Nobrega/Projeto-Sensor-de-Estacionamento/tree/main/imagens/cubeide.png">
+<img src="https://github.com/Atila-Nobrega/Projeto-Sensor-de-Estacionamento/blob/main/imagens/cubeide.png">
 
 * PA0 configurado para GPIO_Output que será utilizado para o BLUE LED.
 * PA1 a PA6 configurados para GPIO_Output e renomeadas de acordo com as entradas do LCD.
